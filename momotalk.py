@@ -51,7 +51,7 @@ def process_momotalk(resource_path: str) -> List[MomotalkOutput]:
     grouped_chained = groupby(sorted_chained, lambda x: x[0])
     for character_id, ((_, academy_messages), (_, favor_schedules)) in grouped_chained:
         print(f"processing momotalk: [character_id: {Fore.GREEN}{character_id}{Fore.RESET}]")
-        momotalk_output = MomotalkOutput(CharacterId=character_id)
+        momotalk_output = MomotalkOutput(CharacterId=character_id, translate='')
         for academy_message in academy_messages:
             momotalk_content = MomotalkContent(**academy_message)
             momotalk_output.content.append(momotalk_content)
@@ -70,4 +70,3 @@ def process_momotalk(resource_path: str) -> List[MomotalkOutput]:
             momotalk_output.title.append(favor_scenario)
             momotalk_outputs.append(momotalk_output)
     return momotalk_outputs
-
