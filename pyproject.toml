@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "ba-razor"
+version = "0.1.0"
+description = "blue archieve story razor and more"
+authors = ["notnotype <notnotype@gamil.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = "^1.10.2"
+PyYAML = "^6.0"
+colorama = "^0.4.6"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
