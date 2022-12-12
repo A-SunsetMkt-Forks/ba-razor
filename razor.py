@@ -1,4 +1,3 @@
-import builtins
 import pathlib
 
 import click
@@ -17,11 +16,12 @@ def _root():
 
 @_root.command("momotalk")
 @click.option("--source", "-s", type=str, default="./resources")
-@click.option("--distinction", "-d", type=str, default="./output")
-def _momotalk(source: str, distinction: str):
+@click.option("--destination", "-d", "--output", "-o", type=str, default="./output")
+def _momotalk(source: str, destination: str):
     """razor momotalk"""
     click.echo("Razing momotalk")
-    output_resource_path = pathlib.Path(distinction)
+    output_resource_path = pathlib.Path(destination)
+    output_resource_path.mkdir(parents=True, exist_ok=True)
 
     momotalk_outputs = process_momotalk(source)
     for momotalk_output in momotalk_outputs:
