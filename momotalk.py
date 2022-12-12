@@ -68,5 +68,5 @@ def process_momotalk(resource_path: str) -> List[MomotalkOutput]:
                 TextTw=localizer.localize(favor_schedule["LocalizeScenarioId"], "Tw"),
             )
             momotalk_output.title.append(favor_scenario)
-            momotalk_outputs.append(momotalk_output)
+        momotalk_outputs.append(momotalk_output)
     return momotalk_outputs
