@@ -27,7 +27,7 @@ python razor.py momotalk -d "./output"
 
 **2. Razor scenario from source `./resources` to directory `output`**
 
-> The feature of razoring scenario is still not implemented.
+> :exclamation: The feature of razoring scenario is still not implemented.
 
 ```shell
 python razor.py scenario -d "./output" -s "./resources"
