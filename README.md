@@ -2,7 +2,7 @@
 
 > A tool to razor blue archive momotalk, scenario and more.
 
-## Usage:
+## Usage
 
 **1. Create Poetry virtual environment and activate it**
 
