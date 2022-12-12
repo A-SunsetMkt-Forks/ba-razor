@@ -25,7 +25,7 @@ def _momotalk(source: str, destination: str):
 
     momotalk_outputs = process_momotalk(source)
     for momotalk_output in momotalk_outputs:
-        file_path = output_resource_path / f"{momotalk_output.CharacterId}.yaml"
+        file_path = output_resource_path / f"{momotalk_output.CharacterId}.yml"
         print(f"{Fore.BLUE}Parse data to yaml and write to file [{file_path}]{Fore.RESET}")
         with open(file_path, mode="w") as fd:
             yaml.dump(momotalk_output.dict(), fd, sort_keys=False, allow_unicode=True, Dumper=MyDumper)

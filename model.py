@@ -65,6 +65,6 @@ class FavorSchedule(BaseModel):
 
 class MomotalkOutput(BaseModel):
     CharacterId: int
-    translate: str
+    translator: str
     title: List[FavorScenario] = []
     content: List[MomotalkContent] = []
