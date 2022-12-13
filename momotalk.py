@@ -57,7 +57,7 @@ def process_momotalk(resource_path: str) -> List[MomotalkOutput]:
             momotalk_output.content.append(momotalk_content)
         for favor_schedule in favor_schedules:
             favor_scenario = FavorScenario(
-                GroupId=favor_schedule["ScenarioSriptGroupId"],
+                GroupId=favor_schedule["ScenarioSriptGroupId"],  # 棒子程序员拼错了，不需要把 Sript 改成 Script
                 FavorScheduleId=favor_schedule["Id"],
                 CharacterId=favor_schedule["CharacterId"],
                 TextJp=localizer.localize(favor_schedule["LocalizeScenarioId"], "Jp"),
