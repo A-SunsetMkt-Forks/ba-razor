@@ -7,7 +7,7 @@ from colorama import Fore
 from momotalk import process_momotalk
 from utils import MyDumper
 
-import git as Git
+import git
 
 
 @click.group()
@@ -35,10 +35,9 @@ def _momotalk(source: str, destination: str):
 
     # 检查源目录是否是 git 仓库
     try:
-        repo = Git.repo.Repo(source)
-        git = repo.git
+        repo = git.repo.Repo(source)
         # 如果是 git 仓库，检查当前分支名
-        current_branch = git.rev_parse("--abbrev-ref", "HEAD")
+        current_branch = repo.git.rev_parse("--abbrev-ref", "HEAD")
         # 获取所有的分支名
         branch_names = [branch.name for branch in repo.branches]
 
@@ -48,25 +47,29 @@ def _momotalk(source: str, destination: str):
             # 如果 global 分支存在，切换到 global 分支，进行一次写入。这样国际服的翻译就能覆盖日服文件的空白字段
             if "global" in branch_names:
                 click.echo(f"{Fore.YELLOW}Switch to global branch{Fore.RESET}")
-                git.checkout("global")
+                repo.git.checkout("global")
                 write_momotalk(source)
                 # 切换回 jp 分支
                 click.echo(f"{Fore.YELLOW}Switch back to jp branch{Fore.RESET}")
-                git.checkout("jp")
+                repo.git.checkout("jp")
         # 如果分支名是 global 并且 jp 分支存在，切换到 jp 分支，进行一次写入
         elif "global" == current_branch and "jp" in branch_names:
             click.echo(f"{Fore.YELLOW}Switch to jp branch{Fore.RESET}")
-            git.checkout("jp")
+            repo.git.checkout("jp")
             write_momotalk(source)
             # 切换回 global 分支
             click.echo(f"{Fore.YELLOW}Switch back to global branch{Fore.RESET}")
-            git.checkout("global")
+            repo.git.checkout("global")
             # 写入
             write_momotalk(source)
     # 如果不是 git 仓库，直接写入
-    except (Git.exc.InvalidGitRepositoryError, Git.exc.NoSuchPathError):
+    except (git.exc.InvalidGitRepositoryError, git.exc.NoSuchPathError):
         click.echo(f"{Fore.RED}Source is not a git repository: {source}{Fore.RESET}")
         write_momotalk(source)
+    except git.GitCommandError as e:  # 提醒添加 git 信任仓库
+        if e.status == 128:
+            click.echo(f"{Fore.RED}{e.stderr.strip()}{Fore.RESET}")
+            click.echo(e.stdout)
 
 
 @_root.command("scenario")
