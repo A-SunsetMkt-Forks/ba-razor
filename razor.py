@@ -20,7 +20,10 @@ def _root():
 @click.option("--destination", "-d", "--output", "-o", type=str, default="./output")
 @click.option("--dumper", "-D", type=str, default="MyDumper")
 def _momotalk(source: str, destination: str, dumper: str):
-    """razor momotalk"""
+    """razor momotalk
+
+    :arg dumper: yaml dumper: CDumper(faster) | Dumper | MyDumper(slowest)
+    """
     click.echo("Razing momotalk")
     output_resource_path = pathlib.Path(destination)
     output_resource_path.mkdir(parents=True, exist_ok=True)
@@ -77,7 +80,10 @@ def _momotalk(source: str, destination: str, dumper: str):
 @click.option("--destination", "-d", type=str, default="./output")
 @click.option("--dumper", "-D", type=str, default="MyDumper")
 def _scenario(source: str, destination: str, dumper: str):
-    """razor scenario"""
+    """razor scenario
+
+    :arg dumper: yaml dumper: CDumper(faster) | Dumper | MyDumper(slowest)
+    """
     click.echo("Razing scenario (NotImplemented)")
 
 

@@ -19,10 +19,10 @@ python razor.py --help
 
 ## Examples
 
-**1. Razor momotalk to directory `output`**
+**1. Razor momotalk to directory `output` using yaml CDumper**
 
 ```shell
-python razor.py momotalk -d "./output"
+python razor.py momotalk -d "./output" -D CDumper
 ```
 
 **2. Razor scenario from source `./resources` to directory `output`**
