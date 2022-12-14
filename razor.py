@@ -39,7 +39,8 @@ def _momotalk(source: str, destination: str):
         # 如果是 git 仓库，检查当前分支名
         current_branch = repo.git.rev_parse("--abbrev-ref", "HEAD")
         # 获取所有的分支名
-        branch_names = [branch.name for branch in repo.branches]
+        # noinspection PyTypeChecker
+        branch_names = [branch.name for branch in repo.branches]  # It is works fine, don't change it
 
         # 如果分支名是 jp，直接进行一次写入
         if "jp" == current_branch:
