@@ -1,6 +1,9 @@
+import io
 import json
 from pathlib import Path
+from typing import Any
 
+from pydantic import BaseModel
 import yaml
 
 
@@ -23,3 +26,20 @@ class Localizer:
     def localize(self, key: int, lang: str = "Jp") -> str:
         """Excel/LocalizeScenarioExcelTable.json"""
         return self.hash_map[key][lang] if lang in self.hash_map[key] else ""
+
+
+def save_yaml(model: BaseModel, distinction: str | io.StringIO | Path, dumper: str | Any = MyDumper):
+    if isinstance(dumper, str):
+        if dumper.lower() == 'cdumper':
+            dumper = yaml.CDumper
+        elif dumper.lower() == 'mydumper':
+            dumper = MyDumper
+        else:
+            if hasattr(yaml, dumper):
+                dumper = getattr(yaml, dumper)
+
+    if isinstance(distinction, str) or isinstance(distinction, Path):
+        with open(distinction, "w") as fd:
+            yaml.dump(model.dict(), fd, sort_keys=False, allow_unicode=True, Dumper=dumper)
+    else:
+        yaml.dump(model.dict(), distinction, sort_keys=False, allow_unicode=True, Dumper=dumper)

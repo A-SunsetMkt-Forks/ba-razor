@@ -1,11 +1,10 @@
 import pathlib
 
 import click
-import yaml
 from colorama import Fore
 
 from momotalk import process_momotalk
-from utils import MyDumper
+from utils import save_yaml
 
 import git
 
@@ -19,7 +18,8 @@ def _root():
 @_root.command("momotalk")
 @click.option("--source", "-s", type=str, default="./resources")
 @click.option("--destination", "-d", "--output", "-o", type=str, default="./output")
-def _momotalk(source: str, destination: str):
+@click.option("--dumper", "-D", type=str, default="MyDumper")
+def _momotalk(source: str, destination: str, dumper: str):
     """razor momotalk"""
     click.echo("Razing momotalk")
     output_resource_path = pathlib.Path(destination)
@@ -30,8 +30,7 @@ def _momotalk(source: str, destination: str):
         for momotalk_output in momotalk_outputs:
             file_path = output_resource_path / f"{momotalk_output.CharacterId}.yml"
             print(f"{Fore.BLUE}Parse data to yaml and write to file [{file_path}]{Fore.RESET}")
-            with open(file_path, mode="w") as fd:
-                yaml.dump(momotalk_output.dict(), fd, sort_keys=False, allow_unicode=True, Dumper=MyDumper)
+            save_yaml(momotalk_output, file_path, dumper=dumper)
 
     # 检查源目录是否是 git 仓库
     try:
@@ -76,7 +75,8 @@ def _momotalk(source: str, destination: str):
 @_root.command("scenario")
 @click.option("--source", "-s", type=str, default="./output")
 @click.option("--destination", "-d", type=str, default="./output")
-def _scenario(source: str, destination: str):
+@click.option("--dumper", "-D", type=str, default="MyDumper")
+def _scenario(source: str, destination: str, dumper: str):
     """razor scenario"""
     click.echo("Razing scenario (NotImplemented)")
 
