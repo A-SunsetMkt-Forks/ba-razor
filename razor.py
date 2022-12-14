@@ -75,8 +75,8 @@ def _momotalk(source: str, destination: str):
 
 @_root.command("scenario")
 @click.option("--source", "-s", type=str, default="./output")
-@click.option("--distinction", "-d", type=str, default="./output")
-def _scenario(source: str, distinction: str):
+@click.option("--destination", "-d", type=str, default="./output")
+def _scenario(source: str, destination: str):
     """razor scenario"""
     click.echo("Razing scenario (NotImplemented)")
 
