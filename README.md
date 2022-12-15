@@ -4,7 +4,7 @@
 
 ## Usage
 
-**1. Create Poetry virtual environment and activate it**
+**1. Create poetry virtual environment and activate it**
 
 ```shell
 poetry install

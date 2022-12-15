@@ -73,6 +73,8 @@ def _momotalk(source: str, destination: str, dumper: str):
         if e.status == 128:
             click.echo(f"{Fore.RED}{e.stderr.strip()}{Fore.RESET}")
             click.echo(e.stdout)
+        else:
+            raise e
 
 
 @_root.command("scenario")
