@@ -45,6 +45,7 @@ def _momotalk(source: str, destination: str, dumper: str):
         # noinspection PyTypeChecker
         branch_names = [branch.name for branch in repo.branches]  # It is works fine, don't change it
 
+        # TODO: 将不同分支输出到不同文件夹，方便之后 merge
         # 如果分支名是 jp，直接进行一次写入
         if "jp" == current_branch:
             write_momotalk(source)
@@ -71,12 +72,15 @@ def _momotalk(source: str, destination: str, dumper: str):
         click.echo(f"{Fore.RED}Source is not a git repository: {source}{Fore.RESET}")
         write_momotalk(source)
     except git.GitCommandError as e:  # 提醒添加 git 信任仓库
-        if e.status == 128:
+        if 128 == e.status:
             click.echo(f"{Fore.RED}{e.stderr.strip()}{Fore.RESET}")
             click.echo(e.stdout)
         else:
             raise e
 
+
+# TODO：merge 日服和国际服 momotalk 的翻译
+# SEE: https://github.com/ba-archive/ba-razor/issues/1
 
 @_root.command("rename")
 @click.option("--source", "-s", type=str, default="./resources")
