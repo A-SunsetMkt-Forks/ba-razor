@@ -39,20 +39,20 @@ def amend_momotalk(source_path: str | Path, amend_path: str | Path, output_path:
         assert source_data.CharacterId == amend_data.CharacterId
 
         def __amend_title(a: FavorScenario, b: FavorScenario):
-            a.TextJp = b.TextJp if b.TextJp else ""
-            a.TextCn = b.TextCn if b.TextCn else ""
-            a.TextKr = b.TextKr if b.TextKr else ""
-            a.TextEn = b.TextEn if b.TextEn else ""
-            a.TextTh = b.TextTh if b.TextTh else ""
-            a.TextTw = b.TextTw if b.TextTw else ""
+            a.TextJp = b.TextJp if b.TextJp else a.TextJp or ""
+            a.TextCn = b.TextCn if b.TextCn else a.TextCn or ""
+            a.TextKr = b.TextKr if b.TextKr else a.TextKr or ""
+            a.TextEn = b.TextEn if b.TextEn else a.TextEn or ""
+            a.TextTh = b.TextTh if b.TextTh else a.TextTh or ""
+            a.TextTw = b.TextTw if b.TextTw else a.TextTw or ""
 
         def __amend_content(a: MomotalkContent, b: MomotalkContent):
-            a.MessageKR = b.MessageKR if b.MessageKR else ""
-            a.MessageJP = b.MessageJP if b.MessageJP else ""
-            a.MessageCN = b.MessageCN if b.MessageCN else ""
-            a.MessageEN = b.MessageEN if b.MessageEN else ""
-            a.MessageTH = b.MessageTH if b.MessageTH else ""
-            a.MessageTW = b.MessageTW if b.MessageTW else ""
+            a.MessageKR = b.MessageKR if b.MessageKR else a.MessageKR or ""
+            a.MessageJP = b.MessageJP if b.MessageJP else a.MessageJP or ""
+            a.MessageCN = b.MessageCN if b.MessageCN else a.MessageCN or ""
+            a.MessageEN = b.MessageEN if b.MessageEN else a.MessageEN or ""
+            a.MessageTH = b.MessageTH if b.MessageTH else a.MessageTH or ""
+            a.MessageTW = b.MessageTW if b.MessageTW else a.MessageTW or ""
 
         # amend title
         for each_source_momotalk_content in source_data.title:
