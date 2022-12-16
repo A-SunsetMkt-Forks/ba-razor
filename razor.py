@@ -4,6 +4,7 @@ import click
 from colorama import Fore
 
 from momotalk import process_momotalk
+from rename_utils import rename_momotalk
 from utils import save_yaml
 
 import git
@@ -75,6 +76,19 @@ def _momotalk(source: str, destination: str, dumper: str):
             click.echo(e.stdout)
         else:
             raise e
+
+
+@_root.command("rename")
+@click.option("--source", "-s", type=str, default="./resources")
+@click.option("--type", "-t", type=str, default="momotalk")
+def _momotalk_rename(source: str, type: str):
+    """rename momotalk files to standard name"""
+
+    output_resource_path = source
+
+    if "momotalk" == type:
+        click.echo("Renaming momotalk")
+        rename_momotalk(output_resource_path)
 
 
 @_root.command("scenario")
