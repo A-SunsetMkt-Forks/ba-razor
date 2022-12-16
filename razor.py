@@ -4,11 +4,10 @@ from typing import Optional
 import click
 from colorama import Fore
 
-from functions.momotalk import process_momotalk
 from functions.amend import amend_momotalk
+from functions.momotalk import process_momotalk
+from functions.rename import rename_momotalk
 from utils import save_yaml
-
-import git
 
 
 @click.group()
@@ -57,6 +56,18 @@ def _amend(source: str, amend: str, destination: Optional[str] = None):
     destination = destination or source
     click.echo("Amending momotalk")
     amend_momotalk(source, amend, destination)
+
+
+@_root.command("rename")
+@click.option("--source", "-s", type=str, default="./resources")
+@click.option("--mode", "-m", type=str, default="momotalk")
+def _momotalk_rename(source: str, mode: str):
+    """rename momotalk files to standard name"""
+    output_resource_path = source
+
+    if "momotalk" == mode:
+        click.echo("Renaming momotalk")
+        rename_momotalk(output_resource_path)
 
 
 if __name__ == '__main__':
