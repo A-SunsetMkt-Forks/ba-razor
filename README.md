@@ -19,6 +19,8 @@ python razor.py --help
 
 ## Examples
 
+### i) Razor momotalk
+
 **1. Razor momotalk to directory `output` using yaml CDumper**
 
 ```shell
@@ -31,6 +33,14 @@ python razor.py momotalk -d "./output" -D CDumper
 
 ```shell
 python razor.py scenario -d "./output" -s "./resources"
+```
+
+### ii) Amend momotalk
+
+1. Amend output_jp to output_gl dump to output
+
+```shell
+python razor.py amend -s output_jp -a output_gl -o output
 ```
 
 ## Milestones
