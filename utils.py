@@ -18,7 +18,7 @@ class Localizer:
         localize_scenario_excel_path = raw_resource_path / "Excel" / "LocalizeScenarioExcelTable.json"
 
         self.hash_map = dict()
-        with open(localize_scenario_excel_path) as fd:
+        with open(localize_scenario_excel_path, encoding="utf8") as fd:
             localize_scenario_data = json.load(fd)["DataList"]
         for each in localize_scenario_data:
             self.hash_map[each["Key"]] = each
@@ -39,7 +39,7 @@ def save_yaml(model: BaseModel, distinction: str | io.StringIO | Path, dumper: s
                 dumper = getattr(yaml, dumper)
 
     if isinstance(distinction, str) or isinstance(distinction, Path):
-        with open(distinction, "w") as fd:
-            yaml.dump(model.dict(), fd, sort_keys=False, allow_unicode=True, Dumper=dumper)
+        with open(distinction, "w", encoding="utf8") as fd:
+            yaml.dump(model.dict(), fd, sort_keys=False, allow_unicode=True, Dumper=dumper, encoding="utf8")
     else:
-        yaml.dump(model.dict(), distinction, sort_keys=False, allow_unicode=True, Dumper=dumper)
+        yaml.dump(model.dict(), distinction, sort_keys=False, allow_unicode=True, Dumper=dumper, encoding="utf8")

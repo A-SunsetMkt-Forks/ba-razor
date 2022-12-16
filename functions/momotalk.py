@@ -10,8 +10,8 @@ from model import FavorScenario, MomotalkOutput, MomotalkContent
 from utils import Localizer
 
 
-def process_momotalk(resource_path: str) -> List[MomotalkOutput]:
-    raw_resource_path = Path(resource_path)
+def process_momotalk(resource_path: str | Path) -> List[MomotalkOutput]:
+    raw_resource_path = Path(resource_path) if isinstance(resource_path, str) else resource_path
     raw_excel_path = raw_resource_path / "Excel"
 
     raw_academy_message_data = []
@@ -19,12 +19,12 @@ def process_momotalk(resource_path: str) -> List[MomotalkOutput]:
 
     academy_message_files = raw_excel_path.glob("AcademyMessanger[0-9]*ExcelTable.json")
     for file in academy_message_files:
-        with open(file) as fd:
+        with open(file, encoding="utf8") as fd:
             raw_academy_message_data += json.load(fd)["DataList"]
     raw_academy_message_data = filter(itemgetter("CharacterId"), raw_academy_message_data)
 
     #  get_favor_schedule_titles
-    with open(raw_excel_path / "AcademyFavorScheduleExcelTable.json") as fd:
+    with open(raw_excel_path / "AcademyFavorScheduleExcelTable.json", encoding="utf8") as fd:
         academy_favor_schedule_data = json.load(fd)["DataList"]
     academy_favor_schedule_data = filter(itemgetter("CharacterId"), academy_favor_schedule_data)
 
