@@ -1,14 +1,12 @@
-import json
-import yaml
-from itertools import groupby
-from operator import itemgetter
+import pathlib
+import re
 from pathlib import Path
-from typing import List
+
+import yaml
 from colorama import Fore
 
-from utils import save_yaml
-
 from model import FavorScenario, MomotalkOutput, MomotalkContent
+from utils import save_yaml
 
 
 def amend_momotalk(source_path: str | Path, amend_path: str | Path, output_path: str | Path):
@@ -19,17 +17,22 @@ def amend_momotalk(source_path: str | Path, amend_path: str | Path, output_path:
     source_path.mkdir(parents=True, exist_ok=True)
     amend_path.mkdir(parents=True, exist_ok=True)
     output_path.mkdir(parents=True, exist_ok=True)
+    regex = re.compile(r"[^0-9]")
+
+    def standardize_filename(filename: pathlib.Path) -> pathlib.Path:
+        return pathlib.Path(regex.sub("", filename.stem) + filename.suffix)
 
     for each_source_file in source_path.glob("*.yml"):
         # get source file path
-        each_amend_file = amend_path / each_source_file.name
+        each_amend_file = amend_path / standardize_filename(each_source_file)
         # get amend file path
         if not each_amend_file.exists() or each_amend_file.is_dir():
             continue
         # get output file path
         output_file = output_path / each_source_file.name
 
-        print(f"{Fore.GREEN}Amending [{each_amend_file}] -> [{each_amend_file}] dump to [{output_file}]{Fore.RESET}")
+        print(
+            f"{Fore.GREEN}Amending [{each_amend_file.name}] -> [{each_source_file.name}] dump to [{output_file}]{Fore.RESET}")
 
         with open(each_source_file, "r", encoding="utf8") as f:
             source_data = MomotalkOutput(**yaml.load(f, Loader=yaml.CLoader))
