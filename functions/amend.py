@@ -23,13 +23,19 @@ def amend_momotalk(source_path: str | Path, amend_path: str | Path, output_path:
         return pathlib.Path(regex.sub("", filename.stem) + filename.suffix)
 
     for each_source_file in source_path.glob("*.yml"):
-        # get source file path
-        each_amend_file = amend_path / standardize_filename(each_source_file)
-        # get amend file path
-        if not each_amend_file.exists() or each_amend_file.is_dir():
-            continue
         # get output file path
         output_file = output_path / each_source_file.name
+
+        # get amend file path
+        each_amend_file = amend_path / standardize_filename(each_source_file)
+        
+        # 如果没有对应的amend文件，直接输出原文件
+        if not each_amend_file.exists() or each_amend_file.is_dir():
+            print(f"{Fore.BLUE}Copying  [{each_amend_file.name}] -> [{output_file}]{Fore.RESET}")
+            with open(each_source_file, "r", encoding="utf8") as f:
+                source_data = MomotalkOutput(**yaml.load(f, Loader=yaml.CLoader))
+            save_yaml(source_data, output_file)
+            continue
 
         print(
             f"{Fore.GREEN}Amending [{each_amend_file.name}] -> [{each_source_file.name}] dump to [{output_file}]{Fore.RESET}")
