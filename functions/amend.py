@@ -5,7 +5,7 @@ from pathlib import Path
 import yaml
 from colorama import Fore
 
-from model import FavorScenario, MomotalkOutput, MomotalkContent
+from model import FavorSchedule, MomotalkOutput, MomotalkContent
 from utils import save_yaml
 
 
@@ -47,7 +47,7 @@ def amend_momotalk(source_path: str | Path, amend_path: str | Path, output_path:
 
         assert source_data.CharacterId == amend_data.CharacterId
 
-        def __amend_title(a: FavorScenario, b: FavorScenario):
+        def __amend_title(a: FavorSchedule, b: FavorSchedule):
             a.TextJp = b.TextJp if b.TextJp else a.TextJp or ""
             a.TextCn = b.TextCn if b.TextCn else a.TextCn or ""
             a.TextKr = b.TextKr if b.TextKr else a.TextKr or ""

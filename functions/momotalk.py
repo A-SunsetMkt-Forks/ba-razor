@@ -6,7 +6,7 @@ from typing import List
 
 from colorama import Fore
 
-from model import FavorScenario, MomotalkOutput, MomotalkContent
+from model import FavorSchedule, MomotalkOutput, MomotalkContent
 from utils import Localizer
 
 
@@ -56,7 +56,7 @@ def process_momotalk(resource_path: str | Path) -> List[MomotalkOutput]:
             momotalk_content = MomotalkContent(**academy_message)
             momotalk_output.content.append(momotalk_content)
         for favor_schedule in favor_schedules:
-            favor_scenario = FavorScenario(
+            favor_scenario = FavorSchedule(
                 GroupId=favor_schedule["ScenarioSriptGroupId"],  # 棒子程序员拼错了，不需要把 Sript 改成 Script
                 FavorScheduleId=favor_schedule["Id"],
                 CharacterId=favor_schedule["CharacterId"],

@@ -46,5 +46,7 @@ python razor.py amend -s output_jp -a output_gl -o output
 ## Milestones
 
 - [x] razor momotalk
-- [ ] razor scenario
-- [ ] more friendly console line interface (CLI)
+- [x] amend momotalk
+- [x] razor favor scenario
+- [ ] razor main scenario
+- [x] more friendly console line interface (CLI)

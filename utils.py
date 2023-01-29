@@ -43,3 +43,10 @@ def save_yaml(model: BaseModel, distinction: str | io.StringIO | Path, dumper: s
             yaml.dump(model.dict(), fd, sort_keys=False, allow_unicode=True, Dumper=dumper, encoding="utf8")
     else:
         yaml.dump(model.dict(), distinction, sort_keys=False, allow_unicode=True, Dumper=dumper, encoding="utf8")
+
+def save_json(model: BaseModel, distinction: str | io.StringIO | Path):
+    if isinstance(distinction, str) or isinstance(distinction, Path):
+        with open(distinction, "w", encoding="utf8") as fd:
+            json.dump(model.dict(), fd, sort_keys=False, ensure_ascii=False, indent=2)
+    else:
+        json.dump(model.dict(), distinction, sort_keys=False, ensure_ascii=False, indent=2)
