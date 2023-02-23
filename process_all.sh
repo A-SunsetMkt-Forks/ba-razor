@@ -30,4 +30,6 @@ python razor.py favor_scenario -s "${git_path}" -o "./output/favor_scenario_jp"
 python razor.py main_scenario -s "${git_path}" -o "./output/main_scenario_jp"
 
 # amend
-python razor.py amend -s "./output/momotalk_jp" -a "./output/momotalk_gl"
+python razor.py amend_momotalk -s "./output/momotalk_jp" -a "./output/momotalk_gl"
+python razor.py amend_scenario -s "./output/main_scenario_jp" -a "./output/main_scenario_gl"
+python razor.py amend_scenario -s "./output/favor_scenario_jp" -a "./output/favor_scenario_gl"

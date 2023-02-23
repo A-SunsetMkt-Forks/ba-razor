@@ -1,16 +1,5 @@
-import io
 import json
 from pathlib import Path
-from typing import Any
-
-from pydantic import BaseModel
-import yaml
-
-
-class MyDumper(yaml.Dumper):
-    def increase_indent(self, flow=False, indentless=False):
-        return super(MyDumper, self).increase_indent(flow, False)
-
 
 class Localizer:
     def __init__(self, resource_path: str):
@@ -27,26 +16,3 @@ class Localizer:
         """Excel/LocalizeScenarioExcelTable.json"""
         return self.hash_map[key][lang] if lang in self.hash_map[key] else ""
 
-
-def save_yaml(model: BaseModel, distinction: str | io.StringIO | Path, dumper: str | Any = MyDumper):
-    if isinstance(dumper, str):
-        if dumper.lower() == 'cdumper':
-            dumper = yaml.CDumper
-        elif dumper.lower() == 'mydumper':
-            dumper = MyDumper
-        else:
-            if hasattr(yaml, dumper):
-                dumper = getattr(yaml, dumper)
-
-    if isinstance(distinction, str) or isinstance(distinction, Path):
-        with open(distinction, "w", encoding="utf8") as fd:
-            yaml.dump(model.dict(), fd, sort_keys=False, allow_unicode=True, Dumper=dumper, encoding="utf8")
-    else:
-        yaml.dump(model.dict(), distinction, sort_keys=False, allow_unicode=True, Dumper=dumper, encoding="utf8")
-
-def save_json(model: BaseModel, distinction: str | io.StringIO | Path):
-    if isinstance(distinction, str) or isinstance(distinction, Path):
-        with open(distinction, "w", encoding="utf8") as fd:
-            json.dump(model.dict(), fd, sort_keys=False, ensure_ascii=False, indent=2)
-    else:
-        json.dump(model.dict(), distinction, sort_keys=False, ensure_ascii=False, indent=2)

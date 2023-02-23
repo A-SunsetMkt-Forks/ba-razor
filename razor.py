@@ -4,11 +4,12 @@ from typing import Optional
 import click
 from colorama import Fore
 
+import model
 from functions.amend import amend_momotalk
 from functions.momotalk import process_momotalk
 from functions.favor_scenario import process_favor_scenario
 from functions.rename import rename_momotalk
-from utils import save_yaml, save_json
+from format_parser import save_yaml, save_json, JsonParser, YamlParser
 
 
 @click.group()
@@ -71,14 +72,23 @@ def _main_scenario(source: str, destination: str):
         print(f"{Fore.BLUE}Parse data to yaml and write to file [{file_path}]{Fore.RESET}")
         save_json(favor_scenario_output, file_path)
 
-@_root.command("amend")
+@_root.command("amend_momotalk")
 @click.option("--source", "-s", type=str, required=True)
 @click.option("--amend", "-a", type=str, required=True)
 @click.option("--destination", "-d", "--output", "-o", type=str)
-def _amend(source: str, amend: str, destination: Optional[str] = None):
+def _amend_momotalk(source: str, amend: str, destination: Optional[str] = None):
     destination = destination or source
     click.echo("Amending momotalk")
-    amend_momotalk(source, amend, destination)
+    amend_momotalk(source, amend, destination, YamlParser, model.MomotalkOutput, "*.yml")
+
+@_root.command("amend_scenario")
+@click.option("--source", "-s", type=str, required=True)
+@click.option("--amend", "-a", type=str, required=True)
+@click.option("--destination", "-d", "--output", "-o", type=str)
+def _amend_scenario(source: str, amend: str, destination: Optional[str] = None):
+    destination = destination or source
+    click.echo("Amending momotalk")
+    amend_momotalk(source, amend, destination, JsonParser, model.ScenarioOutput, "*.json")
 
 
 @_root.command("rename")
