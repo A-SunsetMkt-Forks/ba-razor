@@ -12,10 +12,10 @@ from operator import itemgetter, getitem
 from pydantic import BaseModel, validator
 from icecream import ic
 
-from model import FavorScenarioContent, FavorScenarioOutput
+from model import ScenarioContent, ScenarioOutput
 from utils import Localizer
 
-def process_favor_scenario(resource_path: str | Path) -> List[FavorScenarioOutput]:
+def process_favor_scenario(resource_path: str | Path) -> List[ScenarioOutput]:
     raw_resource_path = Path(resource_path) if isinstance(resource_path, str) else resource_path
     raw_excel_path = raw_resource_path / "Excel"
 
@@ -32,10 +32,10 @@ def process_favor_scenario(resource_path: str | Path) -> List[FavorScenarioOutpu
 
     favor_scenario_outputs = []
     for group_id, favor_secnarios in grouped_favor_scenario_data:
-        favoro_scenario_output = FavorScenarioOutput(GroupId=group_id)
+        favoro_scenario_output = ScenarioOutput(GroupId=group_id)
 
         for each in favor_secnarios:
-            favor_scenario = FavorScenarioContent(**each)
+            favor_scenario = ScenarioContent(**each)
             favoro_scenario_output.content.append(favor_scenario)
 
         favor_scenario_outputs.append(favoro_scenario_output)
