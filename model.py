@@ -71,7 +71,7 @@ class MomotalkOutput(BaseModel):
     content: List[MomotalkContent] = []
 
 class ScenarioOutput(BaseModel):
-    """以 GroupId 为单位的好感剧情导出"""
+    """以 GroupId 为单位的剧情导出"""
     GroupId: int
     translator: str = ""
     content: List[ScenarioContent] = []
