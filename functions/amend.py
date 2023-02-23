@@ -4,8 +4,8 @@ from pathlib import Path
 import yaml
 from colorama import Fore
 
-from model import FavorSchedule, MomotalkOutput, MomotalkContent, I18Text, I18Message, Amendable, AmendableOutput
-from format_parser import FormatParser, save_yaml
+from model import AmendableOutput
+from format_parser import FormatParser
 
 
 def amend_momotalk(

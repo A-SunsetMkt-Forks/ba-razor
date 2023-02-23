@@ -118,6 +118,11 @@ class ScenarioOutput(BaseModel, AmendableOutput):
         assert self.GroupId == other.GroupId
         for self_content in self.content:
             for other_content in other.content:
-                if self_content.GroupId == other_content.GroupId:
+                if (
+                    self_content.VoiceJp == other_content.VoiceJp 
+                    and self_content.TextJp == other_content.TextJp 
+                    and self_content.ScriptKr == other_content.ScriptKr
+                ):
                     self_content.amend(other_content)
                     break
+
