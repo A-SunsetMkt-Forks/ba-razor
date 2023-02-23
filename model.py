@@ -1,5 +1,6 @@
 from typing import Optional, List
 from pydantic import BaseModel, validator
+from icecream import ic
 
 class Amendable:
     def amend(self, other: "Amendable"):
@@ -18,12 +19,12 @@ class I18Message(BaseModel, Amendable):
     MessageTW: str = ""
 
     def amend(self, other: "I18Message"):
-        self.MessageKR = other.MessageKR if other.MessageKR else self.MessageKR
         self.MessageJP = other.MessageJP if other.MessageJP else self.MessageJP
-        self.MessageCN = other.MessageCN if other.MessageCN else self.MessageCN
+        self.MessageKR = other.MessageKR if other.MessageKR else self.MessageKR
         self.MessageEN = other.MessageEN if other.MessageEN else self.MessageEN
         self.MessageTH = other.MessageTH if other.MessageTH else self.MessageTH
         self.MessageTW = other.MessageTW if other.MessageTW else self.MessageTW
+        self.MessageCN = other.MessageCN if other.MessageCN else self.MessageCN or self.MessageTW
 
 class I18Text(BaseModel, Amendable):
     TextJp: str = ""
@@ -35,11 +36,11 @@ class I18Text(BaseModel, Amendable):
 
     def amend(self, other: "I18Text"):
         self.TextJp = other.TextJp if other.TextJp else self.TextJp
-        self.TextCn = other.TextCn if other.TextCn else self.TextCn
         self.TextKr = other.TextKr if other.TextKr else self.TextKr
         self.TextEn = other.TextEn if other.TextEn else self.TextEn
         self.TextTh = other.TextTh if other.TextTh else self.TextTh
         self.TextTw = other.TextTw if other.TextTw else self.TextTw
+        self.TextCn = other.TextCn if other.TextCn else self.TextCn or self.TextTw
 
 class MomotalkContent(I18Message):
     """momotalk对话"""
@@ -122,7 +123,9 @@ class ScenarioOutput(BaseModel, AmendableOutput):
                     self_content.VoiceJp == other_content.VoiceJp 
                     and self_content.TextJp == other_content.TextJp 
                     and self_content.ScriptKr == other_content.ScriptKr
+                    and self_content.GroupId == other_content.GroupId
+                    and self_content.BGMId == other_content.BGMId
+                    and self_content.Sound == other_content.Sound
                 ):
                     self_content.amend(other_content)
                     break
-
