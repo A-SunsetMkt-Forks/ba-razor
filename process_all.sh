@@ -29,10 +29,13 @@ if [ ! -e ".git" ]; then
     git reset origin/master
 fi
 cd "${script_dir}"
-
+pwd
+ls -al
 # global
 # razing momotalk
 cd "${git_path}"
+pwd
+ls -al
 git fetch
 git switch global
 git reset --hard HEAD
