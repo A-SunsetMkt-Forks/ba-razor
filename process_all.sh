@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 set -e
 
 git_url="https://github.com/electricgoat/ba-data"
@@ -29,9 +29,6 @@ if [ ! -e ".git" ]; then
     git reset origin/master
 fi
 cd "${script_dir}"
-
-
-exit
 
 # global
 # razing momotalk
