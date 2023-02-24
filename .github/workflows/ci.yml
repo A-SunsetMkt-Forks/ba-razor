@@ -33,4 +33,4 @@ jobs:
         run: bash process_all.sh
       - uses: "softprops/action-gh-release@v1"
         with:
-          files: ba-razor/output/**
+          files: output/**
