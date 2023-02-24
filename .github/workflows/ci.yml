@@ -16,8 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          path: ba-razor
       - uses: actions/checkout@v3
         with:
           repository: electricgoat/ba-data
@@ -30,7 +28,7 @@ jobs:
           python-version: "3.10"
           cache: "poetry"
       - name: Install dependencies
-        run:  poetry install
+        run:  "poetry install"
       - name: Razoring
         run: bash process_all.sh
       - uses: "softprops/action-gh-release@v1"
