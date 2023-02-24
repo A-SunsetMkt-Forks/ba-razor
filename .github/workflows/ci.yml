@@ -9,16 +9,18 @@ on:
       - "**"
 
 env: 
-  GIT_PATH: "./ba-data"
+  GIT_PATH: "../ba-data"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          path: ba-razor
       - uses: actions/checkout@v3
         with:
-          name: electricgoat/ba-data
+          repository: electricgoat/ba-data
           path: ba-data
       - name: Install poetry
         run: pipx install poetry==1.3.1
