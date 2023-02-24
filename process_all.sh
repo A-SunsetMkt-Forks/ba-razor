@@ -54,6 +54,6 @@ poetry run python razor.py favor_scenario -s "${git_path}" -o "./output/favor_sc
 poetry run python razor.py main_scenario -s "${git_path}" -o "./output/main_scenario_jp"
 
 # amend
-poetry run python razor.py amend_momotalk -s "./output/momotalk_jp" -a "./output/momotalk_gl -o ./output/momotalk"
-poetry run python razor.py amend_scenario -s "./output/main_scenario_jp" -a "./output/main_scenario_gl -o ./output/main_scenario"
-poetry run python razor.py amend_scenario -s "./output/favor_scenario_jp" -a "./output/favor_scenario_gl -o ./output/favor_scenario"
+poetry run python razor.py amend_momotalk -s "./output/momotalk_jp" -a "./output/momotalk_gl" -o "./output/momotalk"
+poetry run python razor.py amend_scenario -s "./output/main_scenario_jp" -a "./output/main_scenario_gl" -o "./output/main_scenario"
+poetry run python razor.py amend_scenario -s "./output/favor_scenario_jp" -a "./output/favor_scenario_gl" -o "./output/favor_scenario"
