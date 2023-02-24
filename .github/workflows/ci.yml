@@ -30,9 +30,7 @@ jobs:
       - name: Install dependencies
         run:  "poetry install"
       - name: Razoring
-        run: |
-          poetry shell
-          bash process_all.sh
+        run: bash process_all.sh
       - uses: "softprops/action-gh-release@v1"
         with:
           files: ba-razor/output/**
