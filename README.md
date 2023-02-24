@@ -1,5 +1,7 @@
 # ba-razor
 
+[![Auto release](https://github.com/ba-archive/ba-razor/actions/workflows/ci.yml/badge.svg)](https://github.com/ba-archive/ba-razor/actions/workflows/ci.yml)
+
 > A tool to razor blue archive momotalk, scenario and more.
 
 ## Usage
