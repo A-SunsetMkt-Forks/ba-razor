@@ -8,8 +8,8 @@ on:
     tags:
       - "**"
 
-permissions:
-  contents: read
+env: 
+  GIT_PATH: "./ba-data"
 
 jobs:
   build:
@@ -30,13 +30,8 @@ jobs:
       - name: Install dependencies
         run:  poetry install
       - name: Razoring
-        run: |
-          pwd
-          ls -al
-          ls ../
-          shell: bash
+        run: bash process_all.sh
       - uses: "softprops/action-gh-release@v1"
         with:
           files: |
-            LICENSE.txt
-            output/*
+            output/**
