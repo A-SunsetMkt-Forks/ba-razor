@@ -9,7 +9,7 @@ on:
       - "**"
 
 env: 
-  GIT_PATH: "../ba-data"
+  GIT_PATH: "ba-data"
 
 jobs:
   build:
@@ -35,5 +35,4 @@ jobs:
         run: bash process_all.sh
       - uses: "softprops/action-gh-release@v1"
         with:
-          files: |
-            output/**
+          files: ba-razor/output/**
