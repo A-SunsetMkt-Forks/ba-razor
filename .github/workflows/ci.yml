@@ -31,6 +31,9 @@ jobs:
         run:  "poetry install"
       - name: Razoring
         run: bash process_all.sh
+      - name: Compress output
+        run: |
+          tar czf output.tar.gz --directory=output .
       - uses: "softprops/action-gh-release@v1"
         with:
-          files: output/**
+          files: output.tar.gz
