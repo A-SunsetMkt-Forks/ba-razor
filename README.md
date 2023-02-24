@@ -37,18 +37,18 @@ python razor.py scenario -d "./output/momotalk_jp" -s "./ba-data"
 
 ### ii) Amend momotalk
 
-1. Amend `output/momotalk_gl` to `output/momotalk_jp` dump to output/momotalk_amend
+1. Amend `output/momotalk_gl` to `output/momotalk_jp` dump to `output/momotalk`
 
 ```shell
-python razor.py amend_momotalk -s "output/momotalk_jp" -a "output/momotalk_gl" -o momotalk_amend
+python razor.py amend_momotalk -s "output/momotalk_jp" -a "output/momotalk_gl" -o "output/momotalk"
 ```
 
 ### ii) Amend scenario
 
-1. Amend `output/scenario_gl` to `output/scenario_jp`  dump to output
+1. Amend `output/scenario_gl` to `output/scenario_jp`  dump to `output/scenario`
 
 ```shell
-python razor.py amend_scenario -s "output/scenario_jp" -a "output/scenario_gl" -o output
+python razor.py amend_scenario -s "output/scenario_jp" -a "output/scenario_gl" -o "output/scenario"
 ```
 
 ## Milestones
