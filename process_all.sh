@@ -41,6 +41,8 @@ poetry run python razor.py momotalk -s "${git_path}" -o "./output/momotalk_gl"
 poetry run python razor.py favor_scenario -s "${git_path}" -o "./output/favor_scenario_gl"
 # main scenario
 poetry run python razor.py main_scenario -s "${git_path}" -o "./output/main_scenario_gl"
+# group scenario
+poetry run python razor.py group_scenario -s "${git_path}" -o "./output/group_scenario_gl"
 
 # branch jp
 cd "${git_path}"
@@ -52,8 +54,11 @@ poetry run python razor.py momotalk -s "${git_path}" -o "./output/momotalk_jp"
 poetry run python razor.py favor_scenario -s "${git_path}" -o "./output/favor_scenario_jp"
 # main scenario
 poetry run python razor.py main_scenario -s "${git_path}" -o "./output/main_scenario_jp"
+# group scenario
+poetry run python razor.py group_scenario -s "${git_path}" -o "./output/group_scenario_jp"
 
 # amend
 poetry run python razor.py amend_momotalk -s "./output/momotalk_jp" -a "./output/momotalk_gl" -o "./output/momotalk"
 poetry run python razor.py amend_scenario -s "./output/main_scenario_jp" -a "./output/main_scenario_gl" -o "./output/main_scenario"
 poetry run python razor.py amend_scenario -s "./output/favor_scenario_jp" -a "./output/favor_scenario_gl" -o "./output/favor_scenario"
+poetry run python razor.py amend_scenario -s "./output/group_scenario_jp" -a "./output/group_scenario_gl" -o "./output/group_scenario"
